@@ -17,10 +17,11 @@ namespace projetov1
 {
     public partial class Register : Form
     {
-        private SqlConnection connect;
+        private SqlConnection connect = null!; // Adiciona o operador null-forgiving
         public Register()
         {
             InitializeComponent();
+            connect = GetSGBDConnection();
         }
         private static SqlConnection GetSGBDConnection()
         {
@@ -29,7 +30,7 @@ namespace projetov1
             string userName = "p2g2";
             string userPass = "-188@BD";
             return new SqlConnection("Data Source = " + dbServer + " ;" + "Initial Catalog = " + dbName +
-                                      "; uid = " + userName + ";" + "password = " + userPass +";TrustServerCertificate=True");
+                                      "; uid = " + userName + ";" + "password = " + userPass + ";TrustServerCertificate=True");
         }
         private bool VerifySGBDConnection()
         {
@@ -86,7 +87,7 @@ namespace projetov1
 
                 while (reader.Read())
                 {
-                    bool isValid = (bool)reader[0];  
+                    bool isValid = (bool)reader[0];
 
                     if (isValid)
                     {
@@ -113,8 +114,8 @@ namespace projetov1
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
-            Login form1 = new Login();
-            form1.Show();
+            Login Loginform = new Login();
+            Loginform.Show();
             this.Hide();
         }
         public bool empty_fields()
@@ -126,6 +127,13 @@ namespace projetov1
         private void close_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Login loginform = new Login();
+            loginform.Show();
+            this.Hide();
         }
     }
 }

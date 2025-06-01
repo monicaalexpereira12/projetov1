@@ -17,11 +17,12 @@ namespace projetov1
 {
     public partial class Login : Form
     {
-        private SqlConnection connect;
+        private SqlConnection connect = null!; // Fix for CS8618: Initialize with null-forgiving operator  
+
         public Login()
         {
             InitializeComponent();
-
+            connect = GetSGBDConnection(); // Ensure 'connect' is initialized in the constructor  
         }
 
         private static SqlConnection GetSGBDConnection()
@@ -59,6 +60,7 @@ namespace projetov1
 
         private void label4_Click(object sender, EventArgs e)
         {
+            
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -67,20 +69,20 @@ namespace projetov1
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
-            if (!VerifySGBDConnection())
-                return;
-
             string username = login_username.Text;
             string password = login_pass.Text;
 
-            if ((username.Length == 0 && password.Length == 0) || !VerifySGBDConnection())
+            if (username.Length == 0 || password.Length == 0 || !VerifySGBDConnection())
             {
+                MessageBox.Show("Por favor, insira um nome de usuário e senha válidos.");
                 return;
             }
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = string.Format("DECLARE @is_valid BIT;EXEC verifyDatabaseUserCredentials '{0}', '{1}', @is_valid OUTPUT;SELECT @is_valid; ", username, password);
-            cmd.Connection = connect;  
+            cmd.CommandText = "DECLARE @is_valid BIT;EXEC verifyDatabaseUserCredentials @username, @password, @is_valid OUTPUT;SELECT @is_valid;";
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Connection = connect;
 
             try
             {
@@ -88,7 +90,7 @@ namespace projetov1
 
                 while (reader.Read())
                 {
-                    bool isValid = (bool)reader[0]; // Assuming @is_valid is the first column returned  
+                    bool isValid = (bool)reader[0];
 
                     if (isValid)
                     {
@@ -117,11 +119,9 @@ namespace projetov1
         {
         }
 
-        private void buttonregister_Click(object sender, EventArgs e)
+        private void button_to_register_Click(object sender, EventArgs e)
         {
-            Register form2 = new Register();
-            form2.Show();
-            this.Hide();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -136,7 +136,12 @@ namespace projetov1
 
         private void login_user_TextChanged(object sender, EventArgs e)
         {
-
+        }
+        private void buttonregister_Click(object sender, EventArgs e)
+        {
+            Register Registerform = new Register();
+            Registerform.Show();
+            this.Hide();
         }
     }
 }

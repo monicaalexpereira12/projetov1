@@ -38,10 +38,10 @@
             panel1 = new Panel();
             close = new Label();
             label6 = new Label();
-            reg_buttonlogin = new Button();
             label4 = new Label();
             label1 = new Label();
             reg_confpass = new TextBox();
+            button1 = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -124,9 +124,9 @@
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(close);
             panel1.Controls.Add(label6);
-            panel1.Controls.Add(reg_buttonlogin);
             panel1.Controls.Add(label4);
             panel1.Dock = DockStyle.Right;
             panel1.Location = new Point(377, 0);
@@ -155,22 +155,6 @@
             label6.Size = new Size(173, 15);
             label6.TabIndex = 11;
             label6.Text = "Already have an account?";
-            // 
-            // reg_buttonlogin
-            // 
-            reg_buttonlogin.BackColor = Color.SteelBlue;
-            reg_buttonlogin.FlatAppearance.BorderColor = Color.SteelBlue;
-            reg_buttonlogin.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
-            reg_buttonlogin.FlatAppearance.MouseOverBackColor = Color.Silver;
-            reg_buttonlogin.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reg_buttonlogin.ForeColor = SystemColors.ButtonHighlight;
-            reg_buttonlogin.Location = new Point(41, 378);
-            reg_buttonlogin.Name = "reg_buttonlogin";
-            reg_buttonlogin.Size = new Size(226, 36);
-            reg_buttonlogin.TabIndex = 10;
-            reg_buttonlogin.Text = "LOG IN";
-            reg_buttonlogin.UseVisualStyleBackColor = false;
-            reg_buttonlogin.Click += buttonregister_Click;
             // 
             // label4
             // 
@@ -203,7 +187,23 @@
             reg_confpass.TabIndex = 19;
             reg_confpass.TextChanged += textBox3_TextChanged;
             // 
-            // Form2
+            // button1
+            // 
+            button1.BackColor = Color.SteelBlue;
+            button1.FlatAppearance.BorderColor = Color.SteelBlue;
+            button1.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
+            button1.FlatAppearance.MouseOverBackColor = Color.Silver;
+            button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(41, 378);
+            button1.Name = "button1";
+            button1.Size = new Size(226, 36);
+            button1.TabIndex = 14;
+            button1.Text = "LOG IN";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -219,7 +219,7 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form2";
+            Name = "Register";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
             panel1.ResumeLayout(false);
@@ -239,10 +239,10 @@
         private Label label2;
         private Panel panel1;
         private Label label6;
-        private Button reg_buttonlogin;
         private Label label4;
         private Label label1;
         private TextBox reg_confpass;
         private Label close;
+        private Button button1;
     }
 }
