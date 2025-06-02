@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="png-clipart-person-logo-people-travel-text-rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png-clipart-person-logo-people-travel-text-rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="5848f8fd-fa08-42ee-9117-98912c84d377" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5848f8fd-fa08-42ee-9117-98912c84d377.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="720_logo_paroquia_104090608760254f86581d5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\720_logo_paroquia_104090608760254f86581d5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-icon-free-vector" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-icon-free-vector.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="360_F_127158933_cDZA4suMXsx2n0LQ03FzpX50R7fBaUx2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\360_F_127158933_cDZA4suMXsx2n0LQ03FzpX50R7fBaUx2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="istockphoto-1212381977-612x612" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\istockphoto-1212381977-612x612.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

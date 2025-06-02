@@ -17,11 +17,12 @@ namespace projetov1
 {
     public partial class Register : Form
     {
-        private SqlConnection connect = null!; // Adiciona o operador null-forgiving
+        private SqlConnection connect; // Adiciona o operador null-forgiving
+        private new Login Parent;
         public Register()
         {
             InitializeComponent();
-            connect = GetSGBDConnection();
+            this.Parent = Parent;
         }
         private static SqlConnection GetSGBDConnection()
         {
@@ -63,60 +64,69 @@ namespace projetov1
         {
 
         }
-
+        private void Register_Load(object sender, EventArgs e)
+        {
+            connect = GetSGBDConnection();
+            if (!VerifySGBDConnection())
+            {
+                MessageBox.Show("Erro ao conectar ao banco de dados.");
+                this.Close();
+            }
+        }
         private void buttonregister_Click(object sender, EventArgs e)
         {
-            if (!VerifySGBDConnection())
-                return;
 
             string username = reg_username.Text;
             string password = reg_pass.Text;
+            string confirmPassword = reg_confpass.Text;
 
-            if ((username.Length == 0 && password.Length == 0) || !VerifySGBDConnection())
+            if ((username.Length == 0 && password.Length == 0))
+            //caso os campos estejam vazios
             {
+                MessageBox.Show("Preencha todos os campos!");
                 return;
             }
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = string.Format("DECLARE @is_valid BIT;EXEC verifyDatabaseUserCredentials '{0}', '{1}', @is_valid OUTPUT;SELECT @is_valid; ", username, password);
-            cmd.Connection = connect;
-
-            try
+            else if (password != confirmPassword)
+            //caso as senhas não coincidam
             {
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                MessageBox.Show("As senhas não coincidem. Por favor, tente novamente.");
+                return;
+            }
+            else
+            {
+                //testar conexão à BD
+                if (!VerifySGBDConnection())
                 {
-                    bool isValid = (bool)reader[0];
-
-                    if (isValid)
-                    {
-                        MessageBox.Show("Registro efetuado com sucesso! Bem vindo " + username);
-                        Menu menu = new Menu();
-                        menu.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Credenciais inválidas!");
-                    }
+                    MessageBox.Show("Erro ao conectar ao banco de dados.");
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connect.Close();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "Exec AddDatabaseUser @username = '" + username + "', @password = '" + password + "'";
+                cmd.Parameters.Clear();
+                cmd.Connection = connect;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Conta criada com sucesso!");
+                    this.Parent.Show(); //abre o login
+                    this.Close(); //fecha o registo
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connect.Close();
+                }
             }
         }
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
-            Login Loginform = new Login();
-            Loginform.Show();
-            this.Hide();
+
         }
         public bool empty_fields()
         {
@@ -133,7 +143,58 @@ namespace projetov1
         {
             Login loginform = new Login();
             loginform.Show();
-            this.Hide();
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string username = reg_username.Text;
+            string password = reg_pass.Text;
+            string confirmPassword = reg_confpass.Text;
+
+            if ((username.Length == 0 && password.Length == 0))
+            //caso os campos estejam vazios
+            {
+                MessageBox.Show("Preencha todos os campos!");
+                return;
+            }
+            else if (password != confirmPassword)
+            //caso as senhas não coincidam
+            {
+                MessageBox.Show("As senhas não coincidem. Por favor, tente novamente.");
+                return;
+            }
+            else
+            {
+                //testar conexão à BD
+                if (!VerifySGBDConnection())
+                {
+                    MessageBox.Show("Erro ao conectar ao banco de dados.");
+                    return;
+                }
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "EXEC dbo.AddDatabaseUser @username = '" + username + "', @password = '" + password + "'";
+                cmd.Parameters.Clear();
+                cmd.Connection = connect;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Conta criada com sucesso!");
+                    this.Parent.Show(); //abre o login
+                    this.Close(); //fecha o registo
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                 
+                {
+                    connect.Close();
+                }
+            }
         }
     }
 }

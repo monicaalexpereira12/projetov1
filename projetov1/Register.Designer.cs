@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            reg_buttonsignup = new Button();
             reg_shpass = new CheckBox();
             reg_pass = new TextBox();
             label5 = new Label();
@@ -36,31 +35,17 @@
             label3 = new Label();
             label2 = new Label();
             panel1 = new Panel();
+            button1 = new Button();
             close = new Label();
             label6 = new Label();
             label4 = new Label();
             label1 = new Label();
             reg_confpass = new TextBox();
-            button1 = new Button();
+            button2 = new Button();
+            logoigreja = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             SuspendLayout();
-            // 
-            // reg_buttonsignup
-            // 
-            reg_buttonsignup.BackColor = Color.LightBlue;
-            reg_buttonsignup.FlatAppearance.BorderColor = Color.LightBlue;
-            reg_buttonsignup.FlatStyle = FlatStyle.Flat;
-            reg_buttonsignup.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reg_buttonsignup.ForeColor = SystemColors.ControlText;
-            reg_buttonsignup.Location = new Point(245, 360);
-            reg_buttonsignup.Margin = new Padding(4);
-            reg_buttonsignup.Name = "reg_buttonsignup";
-            reg_buttonsignup.Padding = new Padding(3);
-            reg_buttonsignup.Size = new Size(101, 32);
-            reg_buttonsignup.TabIndex = 17;
-            reg_buttonsignup.Text = "SIGN UP";
-            reg_buttonsignup.UseVisualStyleBackColor = false;
-            reg_buttonsignup.Click += buttonlogin_Click;
             // 
             // reg_shpass
             // 
@@ -124,6 +109,7 @@
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
+            panel1.Controls.Add(logoigreja);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(close);
             panel1.Controls.Add(label6);
@@ -133,6 +119,22 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(308, 464);
             panel1.TabIndex = 10;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.SteelBlue;
+            button1.FlatAppearance.BorderColor = Color.SteelBlue;
+            button1.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
+            button1.FlatAppearance.MouseOverBackColor = Color.Silver;
+            button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(41, 378);
+            button1.Name = "button1";
+            button1.Size = new Size(226, 36);
+            button1.TabIndex = 14;
+            button1.Text = "LOG IN";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // close
             // 
@@ -187,30 +189,41 @@
             reg_confpass.TabIndex = 19;
             reg_confpass.TextChanged += textBox3_TextChanged;
             // 
-            // button1
+            // button2
             // 
-            button1.BackColor = Color.SteelBlue;
-            button1.FlatAppearance.BorderColor = Color.SteelBlue;
-            button1.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
-            button1.FlatAppearance.MouseOverBackColor = Color.Silver;
-            button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(41, 378);
-            button1.Name = "button1";
-            button1.Size = new Size(226, 36);
-            button1.TabIndex = 14;
-            button1.Text = "LOG IN";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button2.BackColor = Color.LightBlue;
+            button2.FlatAppearance.BorderColor = Color.LightBlue;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.ForeColor = SystemColors.ControlText;
+            button2.Location = new Point(253, 343);
+            button2.Margin = new Padding(4);
+            button2.Name = "button2";
+            button2.Padding = new Padding(3);
+            button2.Size = new Size(101, 32);
+            button2.TabIndex = 20;
+            button2.Text = "SIGN UP";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
+            // logoigreja
+            // 
+            logoigreja.Image = Properties.Resources._720_logo_paroquia_104090608760254f86581d5;
+            logoigreja.Location = new Point(41, 75);
+            logoigreja.Name = "logoigreja";
+            logoigreja.Size = new Size(226, 172);
+            logoigreja.SizeMode = PictureBoxSizeMode.Zoom;
+            logoigreja.TabIndex = 15;
+            logoigreja.TabStop = false;
             // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
+            Controls.Add(button2);
             Controls.Add(reg_confpass);
             Controls.Add(label1);
-            Controls.Add(reg_buttonsignup);
             Controls.Add(reg_shpass);
             Controls.Add(reg_pass);
             Controls.Add(label5);
@@ -224,13 +237,12 @@
             Text = "Form2";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)logoigreja).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button reg_buttonsignup;
         private CheckBox reg_shpass;
         private TextBox reg_pass;
         private Label label5;
@@ -244,5 +256,7 @@
         private TextBox reg_confpass;
         private Label close;
         private Button button1;
+        private Button button2;
+        private PictureBox logoigreja;
     }
 }

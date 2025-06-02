@@ -17,12 +17,11 @@ namespace projetov1
 {
     public partial class Login : Form
     {
-        private SqlConnection connect = null!; // Fix for CS8618: Initialize with null-forgiving operator  
+        private SqlConnection connect = null!;
 
         public Login()
         {
-            InitializeComponent();
-            connect = GetSGBDConnection(); // Ensure 'connect' is initialized in the constructor  
+            InitializeComponent();  
         }
 
         private static SqlConnection GetSGBDConnection()
@@ -69,28 +68,35 @@ namespace projetov1
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
+            /*if (!VerifySGBDConnection())
+                return;
+
             string username = login_username.Text;
             string password = login_pass.Text;
 
-            if (username.Length == 0 || password.Length == 0 || !VerifySGBDConnection())
+            if (username.Length == 0 || password.Length == 0)
             {
                 MessageBox.Show("Por favor, insira um nome de usuário e senha válidos.");
                 return;
             }
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "DECLARE @is_valid BIT;EXEC verifyDatabaseUserCredentials @username, @password, @is_valid OUTPUT;SELECT @is_valid;";
-            cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);
-            cmd.Connection = connect;
-
-            try
+            using (SqlCommand cmd = new SqlCommand("verifyDatabaseUserCredentials", connect))
             {
-                SqlDataReader reader = cmd.ExecuteReader();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
 
-                while (reader.Read())
+                // Parâmetro de saída
+                SqlParameter isValidParam = new SqlParameter("@is_valid", SqlDbType.Bit)
                 {
-                    bool isValid = (bool)reader[0];
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(isValidParam);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    bool isValid = (bool)isValidParam.Value;
 
                     if (isValid)
                     {
@@ -104,17 +110,21 @@ namespace projetov1
                         MessageBox.Show("Credenciais inválidas!");
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connect.Close();
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connect.Close();
+                }
+            }*/
+            //só para teste, remover depois
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
         }
-
+        public static string? CurrentUsername { get; private set; }
         private void button1_Click(object sender, EventArgs e)
         {
         }
@@ -127,6 +137,7 @@ namespace projetov1
         private void Form1_Load(object sender, EventArgs e)
         {
             connect = GetSGBDConnection();
+
         }
 
         private void close_Click(object sender, EventArgs e)
@@ -143,5 +154,6 @@ namespace projetov1
             Registerform.Show();
             this.Hide();
         }
+        
     }
 }

@@ -59,5 +59,85 @@ namespace projetov1.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt {
+            get {
+                object obj = ResourceManager.GetObject("1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1 {
+            get {
+                object obj = ResourceManager.GetObject("1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _360_F_127158933_cDZA4suMXsx2n0LQ03FzpX50R7fBaUx2 {
+            get {
+                object obj = ResourceManager.GetObject("360_F_127158933_cDZA4suMXsx2n0LQ03FzpX50R7fBaUx2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _5848f8fd_fa08_42ee_9117_98912c84d377 {
+            get {
+                object obj = ResourceManager.GetObject("5848f8fd-fa08-42ee-9117-98912c84d377", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _720_logo_paroquia_104090608760254f86581d5 {
+            get {
+                object obj = ResourceManager.GetObject("720_logo_paroquia_104090608760254f86581d5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap istockphoto_1212381977_612x612 {
+            get {
+                object obj = ResourceManager.GetObject("istockphoto-1212381977-612x612", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_clipart_person_logo_people_travel_text_rectangle {
+            get {
+                object obj = ResourceManager.GetObject("png-clipart-person-logo-people-travel-text-rectangle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_profile_icon_free_vector {
+            get {
+                object obj = ResourceManager.GetObject("user-profile-icon-free-vector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

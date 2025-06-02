@@ -42,12 +42,15 @@
             login_shpass = new CheckBox();
             login_buttonlogin = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            logoigreja = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
+            panel1.Controls.Add(logoigreja);
             panel1.Controls.Add(close);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(login_buttonregister);
@@ -199,7 +202,17 @@
             login_buttonlogin.UseVisualStyleBackColor = false;
             login_buttonlogin.Click += buttonlogin_Click;
             // 
-            // Form1
+            // logoigreja
+            // 
+            logoigreja.Image = Properties.Resources._720_logo_paroquia_104090608760254f86581d5;
+            logoigreja.Location = new Point(41, 75);
+            logoigreja.Name = "logoigreja";
+            logoigreja.Size = new Size(226, 172);
+            logoigreja.SizeMode = PictureBoxSizeMode.Zoom;
+            logoigreja.TabIndex = 13;
+            logoigreja.TabStop = false;
+            // 
+            // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -214,12 +227,13 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)logoigreja).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +254,6 @@
         private Label label6;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label close;
+        private PictureBox logoigreja;
     }
 }
