@@ -121,9 +121,6 @@
   <data name="png-clipart-person-logo-people-travel-text-rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png-clipart-person-logo-people-travel-text-rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="5848f8fd-fa08-42ee-9117-98912c84d377" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\5848f8fd-fa08-42ee-9117-98912c84d377.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1000_F_226462576_aXJLcq7m9kkuBebIQO742hGh02vqSoPt1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

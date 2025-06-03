@@ -93,16 +93,6 @@ namespace projetov1.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5848f8fd_fa08_42ee_9117_98912c84d377 {
-            get {
-                object obj = ResourceManager.GetObject("5848f8fd-fa08-42ee-9117-98912c84d377", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _720_logo_paroquia_104090608760254f86581d5 {
             get {
                 object obj = ResourceManager.GetObject("720_logo_paroquia_104090608760254f86581d5", resourceCulture);
