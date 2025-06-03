@@ -23,11 +23,7 @@ namespace projetov1
                 var dados = BuscarDadosUsuario(username);
                 if (dados != null)
                 {
-                    labelNome.Text = dados.Value.Nome;
-                    labelEmail.Text = dados.Value.Email;
-                    labelMorada.Text = dados.Value.Morada;
-                    labelDataNascimento.Text = dados.Value.DataNascimento;
-                    labelTelefone.Text = dados.Value.Telefone;
+
                 }
                 else
                 {
@@ -74,11 +70,7 @@ namespace projetov1
             Telefone = telefone;
 
             // Exemplo de atribuição aos controles do formulário
-            labelNome.Text = Nome;
-            labelEmail.Text = Email;
-            labelMorada.Text = Morada;
-            labelDataNascimento.Text = DataNascimento;
-            labelTelefone.Text = Telefone;
+
         }
 
         private void labelNome_Click(object sender, EventArgs e)
@@ -120,6 +112,87 @@ namespace projetov1
         private void labelMorada_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Grupos_Click(object sender, EventArgs e)
+        {
+            Grupos gruposForm = new Grupos();
+            gruposForm.Show();
+            this.Hide();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alterardados_Click(object sender, EventArgs e)
+        {
+            textBoxNome.ReadOnly = false;
+            textBoxEmail.ReadOnly = false;
+            textBoxMorada.ReadOnly = false;
+            textBoxDataNascimento.ReadOnly = false;
+            textBoxTelefone.ReadOnly = false;
+            buttonSalvar.Visible = true;
+        }
+
+        private void Salvar_Click(object sender, EventArgs e)
+        {
+            var username = Login.CurrentUsername;
+            if (string.IsNullOrEmpty(username)) return;
+
+            string nome = textBoxNome.Text;
+            string email = textBoxEmail.Text;
+            string morada = textBoxMorada.Text;
+            string dataNascimento = textBoxDataNascimento.Text;
+            string telefone = textBoxTelefone.Text;
+
+            string dbServer = "tcp: mednat.ieeta.pt\\SQLSERVER,8101";
+            string dbName = "p2g2";
+            string userName = "p2g2";
+            string userPass = "-188@BD";
+            using var conn = new SqlConnection($"Data Source={dbServer};Initial Catalog={dbName};uid={userName};password={userPass};TrustServerCertificate=True");
+            conn.Open();
+
+            var cmd = new SqlCommand(
+                "UPDATE users SET Nome=@nome, Email=@email, Morada=@morada, DataNascimento=@dataNascimento, Telefone=@telefone WHERE Username=@username", conn);
+            cmd.Parameters.AddWithValue("@nome", nome);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@morada", morada);
+            cmd.Parameters.AddWithValue("@dataNascimento", dataNascimento);
+            cmd.Parameters.AddWithValue("@telefone", telefone);
+            cmd.Parameters.AddWithValue("@username", username);
+
+            int rows = cmd.ExecuteNonQuery();
+
+            textBoxNome.ReadOnly = true;
+            textBoxEmail.ReadOnly = true;
+            textBoxMorada.ReadOnly = true;
+            textBoxDataNascimento.ReadOnly = true;
+            textBoxTelefone.ReadOnly = true;
+            buttonSalvar.Visible = false;
+
+            if (rows > 0)
+                MessageBox.Show("Dados atualizados com sucesso!");
+            else
+                MessageBox.Show("Erro ao atualizar dados.");
+        }
+
+        private void Eventos_Click(object sender, EventArgs e)
+        {
+            Eventos eventosForm = new Eventos();
+            eventosForm.Show();
+            this.Hide();
         }
     }
 }

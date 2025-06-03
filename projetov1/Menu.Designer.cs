@@ -33,7 +33,6 @@
             label4 = new Label();
             panel2 = new Panel();
             Logout = new Button();
-            Return = new Button();
             logoigreja = new PictureBox();
             label2 = new Label();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
@@ -41,18 +40,16 @@
             label3 = new Label();
             profile = new PictureBox();
             teams = new PictureBox();
-            events = new PictureBox();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            pictureBox1 = new PictureBox();
+            events = new PictureBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             ((System.ComponentModel.ISupportInitialize)profile).BeginInit();
             ((System.ComponentModel.ISupportInitialize)teams).BeginInit();
             ((System.ComponentModel.ISupportInitialize)events).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -69,10 +66,10 @@
             // close
             // 
             close.AutoSize = true;
-            close.Font = new Font("Berlin Sans FB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            close.Font = new Font("Berlin Sans FB", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             close.Location = new Point(659, 9);
             close.Name = "close";
-            close.Size = new Size(14, 13);
+            close.Size = new Size(17, 17);
             close.TabIndex = 12;
             close.Text = "X";
             close.Click += close_Click;
@@ -92,7 +89,6 @@
             // 
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(Logout);
-            panel2.Controls.Add(Return);
             panel2.Controls.Add(logoigreja);
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Left;
@@ -116,21 +112,6 @@
             Logout.Text = "Log Out";
             Logout.UseVisualStyleBackColor = true;
             Logout.Click += Logout_Click;
-            // 
-            // Return
-            // 
-            Return.BackgroundImageLayout = ImageLayout.None;
-            Return.FlatAppearance.BorderSize = 2;
-            Return.FlatStyle = FlatStyle.Flat;
-            Return.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Return.ForeColor = SystemColors.ControlLightLight;
-            Return.Location = new Point(51, 267);
-            Return.Name = "Return";
-            Return.Size = new Size(100, 26);
-            Return.TabIndex = 10;
-            Return.Text = "Return";
-            Return.UseVisualStyleBackColor = true;
-            Return.Click += Return_Click;
             // 
             // logoigreja
             // 
@@ -203,14 +184,6 @@
             teams.TabStop = false;
             teams.Click += teams_Click;
             // 
-            // events
-            // 
-            events.Location = new Point(0, 0);
-            events.Name = "events";
-            events.Size = new Size(100, 50);
-            events.TabIndex = 14;
-            events.TabStop = false;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -227,9 +200,9 @@
             label6.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.Location = new Point(409, 317);
             label6.Name = "label6";
-            label6.Size = new Size(71, 22);
+            label6.Size = new Size(77, 22);
             label6.TabIndex = 12;
-            label6.Text = "Teams";
+            label6.Text = "Groups";
             // 
             // label7
             // 
@@ -241,16 +214,16 @@
             label7.TabIndex = 13;
             label7.Text = "Events";
             // 
-            // pictureBox1
+            // events
             // 
-            pictureBox1.Image = Properties.Resources.istockphoto_1212381977_612x612;
-            pictureBox1.Location = new Point(530, 200);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(123, 114);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 15;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            events.Image = Properties.Resources.istockphoto_1212381977_612x612;
+            events.Location = new Point(530, 200);
+            events.Name = "events";
+            events.Size = new Size(123, 114);
+            events.SizeMode = PictureBoxSizeMode.Zoom;
+            events.TabIndex = 15;
+            events.TabStop = false;
+            events.Click += pictureBox1_Click;
             // 
             // Menu
             // 
@@ -258,11 +231,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
             ControlBox = false;
-            Controls.Add(pictureBox1);
+            Controls.Add(events);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(events);
             Controls.Add(teams);
             Controls.Add(label3);
             Controls.Add(label1);
@@ -273,6 +245,7 @@
             Name = "Menu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
+            Load += Menu_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -281,7 +254,6 @@
             ((System.ComponentModel.ISupportInitialize)profile).EndInit();
             ((System.ComponentModel.ISupportInitialize)teams).EndInit();
             ((System.ComponentModel.ISupportInitialize)events).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -295,16 +267,14 @@
         private Label label2;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private PictureBox logoigreja;
-        private Button Return;
         private Button Logout;
         private Label label1;
         private Label label3;
         private PictureBox profile;
         private PictureBox teams;
-        private PictureBox events;
         private Label label5;
         private Label label6;
         private Label label7;
-        private PictureBox pictureBox1;
+        private PictureBox events;
     }
 }

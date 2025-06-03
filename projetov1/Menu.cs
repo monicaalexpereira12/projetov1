@@ -60,12 +60,21 @@ namespace projetov1
 
         private void teams_Click(object sender, EventArgs e)
         {
-
+            Grupos gruposForm = new Grupos();
+            gruposForm.Show();
+            this.Hide();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-                
+            Eventos eventosForm = new Eventos();
+            eventosForm.Show();
+            this.Hide();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

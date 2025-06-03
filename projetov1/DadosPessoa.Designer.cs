@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DadosPessoa));
             panel2 = new Panel();
             Logout = new Button();
             Return = new Button();
@@ -38,24 +37,26 @@
             Button_to_Profile = new Button();
             label2 = new Label();
             imageList1 = new ImageList(components);
-            fotoperfil = new PictureBox();
             close = new Label();
-            labelNome = new Label();
-            labelEmail = new Label();
-            labelMorada = new Label();
-            labelDataNascimento = new Label();
-            labelTelefone = new Label();
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
             panel1 = new Panel();
-            label7 = new Label();
             label8 = new Label();
+            pictureBox1 = new PictureBox();
+            label7 = new Label();
+            textBoxNome = new TextBox();
+            textBoxEmail = new TextBox();
+            textBoxMorada = new TextBox();
+            textBoxDataNascimento = new TextBox();
+            textBoxTelefone = new TextBox();
+            alterardados = new Button();
+            buttonSalvar = new Button();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fotoperfil).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -68,9 +69,9 @@
             panel2.Controls.Add(Button_to_Profile);
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(0, 0);
+            panel2.Location = new Point(0, 73);
             panel2.Name = "panel2";
-            panel2.Size = new Size(164, 464);
+            panel2.Size = new Size(164, 391);
             panel2.TabIndex = 4;
             // 
             // Logout
@@ -80,7 +81,7 @@
             Logout.FlatStyle = FlatStyle.Flat;
             Logout.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Logout.ForeColor = SystemColors.ControlLightLight;
-            Logout.Location = new Point(34, 397);
+            Logout.Location = new Point(34, 333);
             Logout.Name = "Logout";
             Logout.Size = new Size(100, 26);
             Logout.TabIndex = 10;
@@ -95,7 +96,7 @@
             Return.FlatStyle = FlatStyle.Flat;
             Return.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Return.ForeColor = SystemColors.ControlLightLight;
-            Return.Location = new Point(34, 365);
+            Return.Location = new Point(34, 301);
             Return.Name = "Return";
             Return.Size = new Size(100, 26);
             Return.TabIndex = 9;
@@ -108,24 +109,26 @@
             Grupos.FlatAppearance.BorderColor = Color.DarkGray;
             Grupos.FlatAppearance.MouseDownBackColor = SystemColors.ButtonHighlight;
             Grupos.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Grupos.Location = new Point(34, 115);
+            Grupos.Location = new Point(34, 100);
             Grupos.Name = "Grupos";
             Grupos.Size = new Size(100, 87);
             Grupos.TabIndex = 4;
             Grupos.Text = "Teams";
             Grupos.UseVisualStyleBackColor = true;
+            Grupos.Click += Grupos_Click;
             // 
             // Eventos
             // 
             Eventos.FlatAppearance.BorderColor = Color.DarkGray;
             Eventos.FlatAppearance.MouseOverBackColor = SystemColors.ButtonHighlight;
             Eventos.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Eventos.Location = new Point(34, 208);
+            Eventos.Location = new Point(34, 193);
             Eventos.Name = "Eventos";
             Eventos.Size = new Size(100, 87);
             Eventos.TabIndex = 5;
             Eventos.Text = "Events";
             Eventos.UseVisualStyleBackColor = true;
+            Eventos.Click += Eventos_Click;
             // 
             // Button_to_Profile
             // 
@@ -133,7 +136,8 @@
             Button_to_Profile.FlatAppearance.BorderColor = Color.SkyBlue;
             Button_to_Profile.FlatAppearance.MouseDownBackColor = SystemColors.AppWorkspace;
             Button_to_Profile.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Button_to_Profile.Location = new Point(34, 22);
+            Button_to_Profile.ForeColor = SystemColors.ButtonFace;
+            Button_to_Profile.Location = new Point(34, 3);
             Button_to_Profile.Name = "Button_to_Profile";
             Button_to_Profile.Size = new Size(100, 87);
             Button_to_Profile.TabIndex = 3;
@@ -157,72 +161,16 @@
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
-            // fotoperfil
-            // 
-            fotoperfil.InitialImage = (Image)resources.GetObject("fotoperfil.InitialImage");
-            fotoperfil.Location = new Point(533, 79);
-            fotoperfil.Name = "fotoperfil";
-            fotoperfil.Size = new Size(126, 123);
-            fotoperfil.TabIndex = 5;
-            fotoperfil.TabStop = false;
-            // 
             // close
             // 
             close.AutoSize = true;
-            close.Font = new Font("Berlin Sans FB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            close.Location = new Point(659, 9);
+            close.Font = new Font("Berlin Sans FB", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            close.Location = new Point(656, 9);
             close.Name = "close";
-            close.Size = new Size(14, 13);
+            close.Size = new Size(17, 17);
             close.TabIndex = 14;
             close.Text = "X";
             close.Click += close_Click;
-            // 
-            // labelNome
-            // 
-            labelNome.AutoSize = true;
-            labelNome.Location = new Point(249, 166);
-            labelNome.Name = "labelNome";
-            labelNome.Size = new Size(67, 15);
-            labelNome.TabIndex = 15;
-            labelNome.Text = "(username)";
-            labelNome.Click += labelNome_Click;
-            // 
-            // labelEmail
-            // 
-            labelEmail.AutoSize = true;
-            labelEmail.Location = new Point(245, 209);
-            labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(71, 15);
-            labelEmail.TabIndex = 16;
-            labelEmail.Text = "(user_email)";
-            // 
-            // labelMorada
-            // 
-            labelMorada.AutoSize = true;
-            labelMorada.Location = new Point(252, 258);
-            labelMorada.Name = "labelMorada";
-            labelMorada.Size = new Size(83, 15);
-            labelMorada.TabIndex = 17;
-            labelMorada.Text = "(user_morada)";
-            labelMorada.Click += labelMorada_Click;
-            // 
-            // labelDataNascimento
-            // 
-            labelDataNascimento.AutoSize = true;
-            labelDataNascimento.Location = new Point(252, 308);
-            labelDataNascimento.Name = "labelDataNascimento";
-            labelDataNascimento.Size = new Size(90, 15);
-            labelDataNascimento.TabIndex = 18;
-            labelDataNascimento.Text = "(user_birthdate)";
-            // 
-            // labelTelefone
-            // 
-            labelTelefone.AutoSize = true;
-            labelTelefone.Location = new Point(287, 356);
-            labelTelefone.Name = "labelTelefone";
-            labelTelefone.Size = new Size(76, 15);
-            labelTelefone.TabIndex = 19;
-            labelTelefone.Text = "(user_phone)";
             // 
             // label1
             // 
@@ -278,23 +226,13 @@
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
-            panel1.Controls.Add(label7);
             panel1.Controls.Add(label8);
+            panel1.Controls.Add(close);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(164, 0);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(521, 73);
+            panel1.Size = new Size(685, 73);
             panel1.TabIndex = 25;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Berlin Sans FB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(659, 9);
-            label7.Name = "label7";
-            label7.Size = new Size(14, 13);
-            label7.TabIndex = 12;
-            label7.Text = "X";
             // 
             // label8
             // 
@@ -307,34 +245,121 @@
             label8.TabIndex = 8;
             label8.Text = "BD 2025";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.user_profile_icon_free_vector;
+            pictureBox1.Location = new Point(534, 79);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(139, 125);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 26;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(184, 130);
+            label7.Name = "label7";
+            label7.Size = new Size(103, 18);
+            label7.TabIndex = 27;
+            label7.Text = "O seu perfil:";
+            // 
+            // textBoxNome
+            // 
+            textBoxNome.Location = new Point(235, 163);
+            textBoxNome.Name = "textBoxNome";
+            textBoxNome.ReadOnly = true;
+            textBoxNome.Size = new Size(272, 23);
+            textBoxNome.TabIndex = 28;
+            textBoxNome.TextChanged += textBoxNome_TextChanged;
+            // 
+            // textBoxEmail
+            // 
+            textBoxEmail.Location = new Point(235, 205);
+            textBoxEmail.Name = "textBoxEmail";
+            textBoxEmail.ReadOnly = true;
+            textBoxEmail.Size = new Size(272, 23);
+            textBoxEmail.TabIndex = 29;
+            // 
+            // textBoxMorada
+            // 
+            textBoxMorada.Location = new Point(252, 254);
+            textBoxMorada.Name = "textBoxMorada";
+            textBoxMorada.ReadOnly = true;
+            textBoxMorada.Size = new Size(255, 23);
+            textBoxMorada.TabIndex = 30;
+            // 
+            // textBoxDataNascimento
+            // 
+            textBoxDataNascimento.Location = new Point(255, 305);
+            textBoxDataNascimento.Name = "textBoxDataNascimento";
+            textBoxDataNascimento.ReadOnly = true;
+            textBoxDataNascimento.Size = new Size(136, 23);
+            textBoxDataNascimento.TabIndex = 31;
+            // 
+            // textBoxTelefone
+            // 
+            textBoxTelefone.Location = new Point(287, 352);
+            textBoxTelefone.Name = "textBoxTelefone";
+            textBoxTelefone.ReadOnly = true;
+            textBoxTelefone.Size = new Size(147, 23);
+            textBoxTelefone.TabIndex = 32;
+            // 
+            // alterardados
+            // 
+            alterardados.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            alterardados.Location = new Point(575, 409);
+            alterardados.Name = "alterardados";
+            alterardados.Size = new Size(87, 29);
+            alterardados.TabIndex = 33;
+            alterardados.Text = "Alterar";
+            alterardados.UseVisualStyleBackColor = true;
+            alterardados.Click += alterardados_Click;
+            // 
+            // buttonSalvar
+            // 
+            buttonSalvar.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSalvar.Location = new Point(472, 409);
+            buttonSalvar.Name = "buttonSalvar";
+            buttonSalvar.Size = new Size(87, 29);
+            buttonSalvar.TabIndex = 34;
+            buttonSalvar.Text = "Salvar";
+            buttonSalvar.UseVisualStyleBackColor = true;
+            buttonSalvar.Visible = false;
+            buttonSalvar.Click += Salvar_Click;
+            // 
             // DadosPessoa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
-            Controls.Add(panel1);
+            Controls.Add(buttonSalvar);
+            Controls.Add(alterardados);
+            Controls.Add(textBoxTelefone);
+            Controls.Add(textBoxDataNascimento);
+            Controls.Add(textBoxMorada);
+            Controls.Add(textBoxEmail);
+            Controls.Add(textBoxNome);
+            Controls.Add(label7);
+            Controls.Add(pictureBox1);
+            Controls.Add(panel2);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
-            Controls.Add(labelTelefone);
-            Controls.Add(labelDataNascimento);
-            Controls.Add(labelMorada);
-            Controls.Add(labelEmail);
-            Controls.Add(labelNome);
-            Controls.Add(close);
-            Controls.Add(fotoperfil);
-            Controls.Add(panel2);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "DadosPessoa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DadosPessoa";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)fotoperfil).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -349,20 +374,22 @@
         private ImageList imageList1;
         private Button Return;
         private Button Logout;
-        private PictureBox fotoperfil;
         private Label close;
-        private Label labelNome;
-        private Label labelEmail;
-        private Label labelMorada;
-        private Label labelDataNascimento;
-        private Label labelTelefone;
         private Label label1;
         private Label label3;
         private Label label4;
         private Label label5;
         private Label label6;
         private Panel panel1;
-        private Label label7;
         private Label label8;
+        private PictureBox pictureBox1;
+        private Label label7;
+        private TextBox textBoxNome;
+        private TextBox textBoxEmail;
+        private TextBox textBoxMorada;
+        private TextBox textBoxDataNascimento;
+        private TextBox textBoxTelefone;
+        private Button alterardados;
+        private Button buttonSalvar;
     }
 }

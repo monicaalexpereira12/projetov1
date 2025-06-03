@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            logoigreja = new PictureBox();
             close = new Label();
             label6 = new Label();
             login_buttonregister = new Button();
@@ -42,7 +43,6 @@
             login_shpass = new CheckBox();
             login_buttonlogin = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            logoigreja = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             SuspendLayout();
@@ -61,13 +61,23 @@
             panel1.Size = new Size(308, 464);
             panel1.TabIndex = 0;
             // 
+            // logoigreja
+            // 
+            logoigreja.Image = Properties.Resources._720_logo_paroquia_104090608760254f86581d5;
+            logoigreja.Location = new Point(41, 75);
+            logoigreja.Name = "logoigreja";
+            logoigreja.Size = new Size(226, 172);
+            logoigreja.SizeMode = PictureBoxSizeMode.Zoom;
+            logoigreja.TabIndex = 13;
+            logoigreja.TabStop = false;
+            // 
             // close
             // 
             close.AutoSize = true;
-            close.Font = new Font("Berlin Sans FB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            close.Font = new Font("Berlin Sans FB", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             close.Location = new Point(282, 9);
             close.Name = "close";
-            close.Size = new Size(14, 13);
+            close.Size = new Size(17, 17);
             close.TabIndex = 12;
             close.Text = "X";
             close.Click += close_Click;
@@ -201,16 +211,6 @@
             login_buttonlogin.Text = "LOG IN";
             login_buttonlogin.UseVisualStyleBackColor = false;
             login_buttonlogin.Click += buttonlogin_Click;
-            // 
-            // logoigreja
-            // 
-            logoigreja.Image = Properties.Resources._720_logo_paroquia_104090608760254f86581d5;
-            logoigreja.Location = new Point(41, 75);
-            logoigreja.Name = "logoigreja";
-            logoigreja.Size = new Size(226, 172);
-            logoigreja.SizeMode = PictureBoxSizeMode.Zoom;
-            logoigreja.TabIndex = 13;
-            logoigreja.TabStop = false;
             // 
             // Login
             // 
