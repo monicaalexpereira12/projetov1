@@ -40,6 +40,11 @@
             label4 = new Label();
             panel1 = new Panel();
             close = new Label();
+            comboBox1 = new ComboBox();
+            eventos_box = new Label();
+            label2 = new Label();
+            check_disponibilidade = new CheckBox();
+            buttonSalvar = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -188,11 +193,67 @@
             close.Text = "X";
             close.Click += close_Click;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(204, 140);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(428, 23);
+            comboBox1.TabIndex = 50;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // eventos_box
+            // 
+            eventos_box.AutoSize = true;
+            eventos_box.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            eventos_box.Location = new Point(204, 119);
+            eventos_box.Name = "eventos_box";
+            eventos_box.Size = new Size(73, 18);
+            eventos_box.TabIndex = 51;
+            eventos_box.Text = "Eventos";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(204, 298);
+            label2.Name = "label2";
+            label2.Size = new Size(129, 18);
+            label2.TabIndex = 52;
+            label2.Text = "Disponibilidade";
+            // 
+            // check_disponibilidade
+            // 
+            check_disponibilidade.AutoSize = true;
+            check_disponibilidade.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            check_disponibilidade.Location = new Point(204, 319);
+            check_disponibilidade.Name = "check_disponibilidade";
+            check_disponibilidade.Size = new Size(106, 22);
+            check_disponibilidade.TabIndex = 53;
+            check_disponibilidade.Text = "Confirmar";
+            check_disponibilidade.UseVisualStyleBackColor = true;
+            // 
+            // buttonSalvar
+            // 
+            buttonSalvar.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSalvar.Location = new Point(545, 392);
+            buttonSalvar.Name = "buttonSalvar";
+            buttonSalvar.Size = new Size(87, 29);
+            buttonSalvar.TabIndex = 54;
+            buttonSalvar.Text = "Salvar";
+            buttonSalvar.UseVisualStyleBackColor = true;
+            buttonSalvar.Click += buttonSalvar_Click;
+            // 
             // Eventos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
+            Controls.Add(buttonSalvar);
+            Controls.Add(check_disponibilidade);
+            Controls.Add(label2);
+            Controls.Add(eventos_box);
+            Controls.Add(comboBox1);
             Controls.Add(label8);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -201,7 +262,6 @@
             Name = "Eventos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Eventos";
-            Load += Form1_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -223,5 +283,10 @@
         private Panel panel1;
         private Button button3;
         private Label close;
+        private ComboBox comboBox1;
+        private Label eventos_box;
+        private Label label2;
+        private CheckBox check_disponibilidade;
+        private Button buttonSalvar;
     }
 }

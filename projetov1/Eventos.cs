@@ -1,3 +1,5 @@
+using Microsoft.Data.SqlClient;
+
 namespace projetov1
 {
     public partial class Eventos : Form
@@ -5,6 +7,14 @@ namespace projetov1
         public Eventos()
         {
             InitializeComponent();
+            comboBox1.Items.AddRange(new string[] {
+                   "Missa Dominical",
+                   "Casamento",
+                   "Batizado",
+                   "Procissão",
+                   "Retiro",
+                   "Encontro de Jovens"
+               });
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -12,45 +22,7 @@ namespace projetov1
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonlogin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonregister_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void Return_Click(object sender, EventArgs e)
         {
@@ -83,6 +55,45 @@ namespace projetov1
             DadosPessoa dadosPessoaForm = new DadosPessoa();
             dadosPessoaForm.Show();
             this.Hide();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            string username = Login.CurrentUsername;
+            string eventoSelecionado = comboBox1.SelectedItem?.ToString() ?? "";
+            bool disponibilidade = check_disponibilidade.Checked;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(eventoSelecionado))
+            {
+                MessageBox.Show("Selecione um evento.");
+                return;
+            }
+
+            string dbServer = "tcp: mednat.ieeta.pt\\SQLSERVER,8101";
+            string dbName = "p2g2";
+            string userName = "p2g2";
+            string userPass = "-188@BD";
+            using var conn = new SqlConnection($"Data Source={dbServer};Initial Catalog={dbName};uid={userName};password={userPass};TrustServerCertificate=True");
+            conn.Open();
+
+            // Supondo que existe uma tabela DisponibilidadeEventos com Username, Evento, Disponivel
+            var cmd = new SqlCommand(
+                "INSERT INTO DisponibilidadeEventos (Username, Evento, Disponivel) VALUES (@username, @evento, @disponivel)", conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@evento", eventoSelecionado);
+            cmd.Parameters.AddWithValue("@disponivel", disponibilidade);
+
+            int rows = cmd.ExecuteNonQuery();
+            if (rows > 0)
+                MessageBox.Show("Disponibilidade registrada!");
+            else
+                MessageBox.Show("Erro ao registrar disponibilidade.");
         }
     }
 }
