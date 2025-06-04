@@ -43,6 +43,7 @@
             login_shpass = new CheckBox();
             login_buttonlogin = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            button1 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             SuspendLayout();
@@ -202,7 +203,7 @@
             login_buttonlogin.FlatStyle = FlatStyle.Flat;
             login_buttonlogin.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             login_buttonlogin.ForeColor = SystemColors.ControlText;
-            login_buttonlogin.Location = new Point(220, 307);
+            login_buttonlogin.Location = new Point(220, 281);
             login_buttonlogin.Margin = new Padding(4);
             login_buttonlogin.Name = "login_buttonlogin";
             login_buttonlogin.Padding = new Padding(3);
@@ -212,11 +213,29 @@
             login_buttonlogin.UseVisualStyleBackColor = false;
             login_buttonlogin.Click += buttonlogin_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.SteelBlue;
+            button1.FlatAppearance.BorderColor = Color.LightBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(103, 382);
+            button1.Margin = new Padding(4);
+            button1.Name = "button1";
+            button1.Padding = new Padding(3);
+            button1.Size = new Size(159, 32);
+            button1.TabIndex = 10;
+            button1.Text = "LOG IN AS ADMIN";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
+            Controls.Add(button1);
             Controls.Add(login_buttonlogin);
             Controls.Add(login_shpass);
             Controls.Add(login_pass);
@@ -255,5 +274,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label close;
         private PictureBox logoigreja;
+        private Button button1;
     }
 }

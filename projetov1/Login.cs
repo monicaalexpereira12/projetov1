@@ -21,7 +21,7 @@ namespace projetov1
 
         public Login()
         {
-            InitializeComponent();  
+            InitializeComponent();
         }
 
         private static SqlConnection GetSGBDConnection()
@@ -59,7 +59,7 @@ namespace projetov1
 
         private void label4_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace projetov1
 
         private void button_to_register_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -154,6 +154,12 @@ namespace projetov1
             Registerform.Show();
             this.Hide();
         }
-        
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MenuAdmin menuadmin = new MenuAdmin();
+            menuadmin.Show();
+            this.Hide();
+        }
     }
 }

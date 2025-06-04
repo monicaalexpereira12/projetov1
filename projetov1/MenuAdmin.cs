@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace projetov1
 {
-    public partial class Menu : Form
+    public partial class MenuAdmin : Form
     {
-        public Menu()
+        public MenuAdmin()
         {
             InitializeComponent();
         }
@@ -32,6 +32,7 @@ namespace projetov1
 
         }
 
+        
         private void Logout_Click(object sender, EventArgs e)
         {
             Login loginForm = new Login();
@@ -46,14 +47,14 @@ namespace projetov1
 
         private void profile_Click(object sender, EventArgs e)
         {
-            DadosPessoa dadosPessoaform = new DadosPessoa();
+            DadosAdmin dadosPessoaform = new DadosAdmin();
             dadosPessoaform.Show();
             this.Hide();
         }
 
         private void teams_Click(object sender, EventArgs e)
         {
-            Grupos gruposForm = new Grupos();
+            grupoAdmin gruposForm = new grupoAdmin();
             gruposForm.Show();
             this.Hide();
         }
