@@ -203,7 +203,7 @@
             login_buttonlogin.FlatStyle = FlatStyle.Flat;
             login_buttonlogin.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             login_buttonlogin.ForeColor = SystemColors.ControlText;
-            login_buttonlogin.Location = new Point(220, 281);
+            login_buttonlogin.Location = new Point(220, 305);
             login_buttonlogin.Margin = new Padding(4);
             login_buttonlogin.Name = "login_buttonlogin";
             login_buttonlogin.Padding = new Padding(3);
@@ -215,16 +215,16 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.SteelBlue;
+            button1.BackColor = Color.LightBlue;
             button1.FlatAppearance.BorderColor = Color.LightBlue;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(103, 382);
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(53, 305);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Padding = new Padding(3);
-            button1.Size = new Size(159, 32);
+            button1.Size = new Size(130, 32);
             button1.TabIndex = 10;
             button1.Text = "LOG IN AS ADMIN";
             button1.UseVisualStyleBackColor = false;

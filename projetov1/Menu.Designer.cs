@@ -37,7 +37,6 @@
             label2 = new Label();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             label1 = new Label();
-            label3 = new Label();
             profile = new PictureBox();
             teams = new PictureBox();
             label5 = new Label();
@@ -146,19 +145,9 @@
             label1.Font = new Font("Arial Rounded MT Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(207, 72);
             label1.Name = "label1";
-            label1.Size = new Size(120, 22);
+            label1.Size = new Size(115, 22);
             label1.TabIndex = 6;
-            label1.Text = "Bem Vindo, ";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(320, 69);
-            label3.Name = "label3";
-            label3.Size = new Size(107, 25);
-            label3.TabIndex = 7;
-            label3.Text = "(username)";
+            label1.Text = "Bem Vindo!";
             // 
             // profile
             // 
@@ -236,7 +225,6 @@
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(teams);
-            Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -269,7 +257,6 @@
         private PictureBox logoigreja;
         private Button Logout;
         private Label label1;
-        private Label label3;
         private PictureBox profile;
         private PictureBox teams;
         private Label label5;

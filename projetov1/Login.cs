@@ -68,7 +68,7 @@ namespace projetov1
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
-            /*if (!VerifySGBDConnection())
+            if (!VerifySGBDConnection())
                 return;
 
             string username = login_username.Text;
@@ -118,11 +118,8 @@ namespace projetov1
                 {
                     connect.Close();
                 }
-            }*/
-            //só para teste, remover depois
-            Menu menu = new Menu();
-            menu.Show();
-            this.Hide();
+            }
+            
         }
         public static string? CurrentUsername { get; private set; }
         private void button1_Click(object sender, EventArgs e)
@@ -157,9 +154,57 @@ namespace projetov1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MenuAdmin menuadmin = new MenuAdmin();
-            menuadmin.Show();
-            this.Hide();
+            if (!VerifySGBDConnection())
+                return;
+
+            string username = login_username.Text;
+            string password = login_pass.Text;
+
+            if (username.Length == 0 || password.Length == 0)
+            {
+                MessageBox.Show("Por favor, insira um nome de usuário e senha válidos.");
+                return;
+            }
+
+            using (SqlCommand cmd = new SqlCommand("verifyDatabaseUserCredentials", connect))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                // Parâmetro de saída
+                SqlParameter isValidParam = new SqlParameter("@is_valid", SqlDbType.Bit)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(isValidParam);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    bool isValid = (bool)isValidParam.Value;
+
+                    if (isValid)
+                    {
+                        MessageBox.Show("Login efetuado com sucesso! Olá " + username);
+                        Menu menu = new Menu();
+                        menu.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Credenciais inválidas!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connect.Close();
+                }
+            }
         }
     }
 }

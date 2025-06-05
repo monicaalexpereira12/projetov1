@@ -43,6 +43,8 @@
             label1 = new Label();
             reg_confpass = new TextBox();
             button2 = new Button();
+            emailBox = new TextBox();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoigreja).BeginInit();
             SuspendLayout();
@@ -51,7 +53,7 @@
             // 
             reg_shpass.AutoSize = true;
             reg_shpass.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reg_shpass.Location = new Point(55, 305);
+            reg_shpass.Location = new Point(53, 369);
             reg_shpass.Name = "reg_shpass";
             reg_shpass.Size = new Size(120, 18);
             reg_shpass.TabIndex = 16;
@@ -206,7 +208,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button2.ForeColor = SystemColors.ControlText;
-            button2.Location = new Point(253, 343);
+            button2.Location = new Point(260, 393);
             button2.Margin = new Padding(4);
             button2.Name = "button2";
             button2.Padding = new Padding(3);
@@ -216,11 +218,32 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
+            // emailBox
+            // 
+            emailBox.Location = new Point(55, 340);
+            emailBox.Name = "emailBox";
+            emailBox.Size = new Size(266, 23);
+            emailBox.TabIndex = 21;
+            emailBox.TextChanged += emailBox_TextChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(53, 320);
+            label7.Name = "label7";
+            label7.Size = new Size(48, 17);
+            label7.TabIndex = 22;
+            label7.Text = "Email";
+            label7.Click += label7_Click;
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(685, 464);
+            Controls.Add(label7);
+            Controls.Add(emailBox);
             Controls.Add(button2);
             Controls.Add(reg_confpass);
             Controls.Add(label1);
@@ -258,5 +281,7 @@
         private Button button1;
         private Button button2;
         private PictureBox logoigreja;
+        private TextBox emailBox;
+        private Label label7;
     }
 }

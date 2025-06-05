@@ -11,18 +11,19 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
+using BCrypt.Net;
 
 
 namespace projetov1
 {
     public partial class Register : Form
     {
-        private SqlConnection connect; // Adiciona o operador null-forgiving
-        private new Login Parent;
+        private SqlConnection connect;
         public Register()
         {
             InitializeComponent();
-            this.Parent = Parent;
+
         }
         private static SqlConnection GetSGBDConnection()
         {
@@ -73,56 +74,7 @@ namespace projetov1
                 this.Close();
             }
         }
-        private void buttonregister_Click(object sender, EventArgs e)
-        {
 
-            string username = reg_username.Text;
-            string password = reg_pass.Text;
-            string confirmPassword = reg_confpass.Text;
-
-            if ((username.Length == 0 && password.Length == 0))
-            //caso os campos estejam vazios
-            {
-                MessageBox.Show("Preencha todos os campos!");
-                return;
-            }
-            else if (password != confirmPassword)
-            //caso as senhas não coincidam
-            {
-                MessageBox.Show("As senhas não coincidem. Por favor, tente novamente.");
-                return;
-            }
-            else
-            {
-                //testar conexão à BD
-                if (!VerifySGBDConnection())
-                {
-                    MessageBox.Show("Erro ao conectar ao banco de dados.");
-                    return;
-                }
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "Exec AddDatabaseUser @username = '" + username + "', @password = '" + password + "'";
-                cmd.Parameters.Clear();
-                cmd.Connection = connect;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Conta criada com sucesso!");
-                    this.Parent.Show(); //abre o login
-                    this.Close(); //fecha o registo
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connect.Close();
-                }
-            }
-        }
 
         private void buttonlogin_Click(object sender, EventArgs e)
         {
@@ -130,7 +82,7 @@ namespace projetov1
         }
         public bool empty_fields()
         {
-            if (reg_username.Text == "" || reg_pass.Text == "" || reg_confpass.Text == "")
+            if (reg_username.Text == "" || reg_pass.Text == "" || reg_confpass.Text == "" || emailBox.Text == "")
             { return true; }
             else { return false; }
         }
@@ -151,50 +103,109 @@ namespace projetov1
             string username = reg_username.Text;
             string password = reg_pass.Text;
             string confirmPassword = reg_confpass.Text;
+            string email = emailBox.Text;
 
-            if ((username.Length == 0 && password.Length == 0))
-            //caso os campos estejam vazios
+            if (empty_fields())
             {
                 MessageBox.Show("Preencha todos os campos!");
                 return;
             }
             else if (password != confirmPassword)
-            //caso as senhas não coincidam
             {
                 MessageBox.Show("As senhas não coincidem. Por favor, tente novamente.");
                 return;
             }
-            else
+
+            try
             {
-                //testar conexão à BD
                 if (!VerifySGBDConnection())
                 {
                     MessageBox.Show("Erro ao conectar ao banco de dados.");
                     return;
                 }
 
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "EXEC dbo.AddDatabaseUser @username = '" + username + "', @password = '" + password + "'";
-                cmd.Parameters.Clear();
-                cmd.Connection = connect;
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
-                try
+                // Usando transação para garantir integridade
+                using (SqlTransaction transaction = connect.BeginTransaction())
                 {
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Conta criada com sucesso!");
-                    this.Parent.Show(); //abre o login
-                    this.Close(); //fecha o registo
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                 
-                {
-                    connect.Close();
+                    try
+                    {
+                        // 1. Inserir na tabela Pessoa e obter o ID gerado
+                        int newId;
+                        using (SqlCommand cmd = new SqlCommand(
+                            "INSERT INTO igreja.Pessoa (nome_completo, email) OUTPUT INSERTED.id_pessoa VALUES (@nome, @email);",
+                            connect, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@nome", username);
+                            cmd.Parameters.AddWithValue("@email", email);
+                            newId = (int)cmd.ExecuteScalar();
+                        }
+
+                        // 2. Inserir na tabela Users com o mesmo ID
+                        using (SqlCommand cmd = new SqlCommand(
+                            "INSERT INTO igreja.Users (id_number, password_hash, funcao) VALUES (@id, @password, @role);",
+                            connect, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@id", newId);
+                            cmd.Parameters.AddWithValue("@password", hashedPassword);
+                            cmd.Parameters.AddWithValue("@role", "Utilizador");
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected == 0)
+                            {
+                                throw new Exception("Falha ao inserir na tabela Users");
+                            }
+                        }
+
+                        transaction.Commit();
+                        MessageBox.Show("Conta criada com sucesso!");
+                        Menu menu = new Menu();
+                        menu.Show();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw; 
+                    }
                 }
             }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627) 
+                {
+                    if (ex.Message.Contains("email"))
+                        MessageBox.Show("Este email já está registado.");
+                    else if (ex.Message.Contains("username"))
+                        MessageBox.Show("Este nome de utilizador já existe.");
+                    else
+                        MessageBox.Show("Registro duplicado: " + ex.Message);
+                }
+                else
+                {
+                    MessageBox.Show("Erro SQL: " + ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message);
+            }
+            finally
+            {
+                if (connect?.State == ConnectionState.Open)
+                    connect.Close();
+            }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void emailBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

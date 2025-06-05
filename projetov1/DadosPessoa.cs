@@ -17,13 +17,17 @@ namespace projetov1
         {
             InitializeComponent();
 
-            var username = Login.CurrentUsername;
-            if (!string.IsNullOrEmpty(username))
+            var email = Login.CurrentUsername; // Supondo que Login.CurrentUsername armazene o email do usuário
+            if (!string.IsNullOrEmpty(email))
             {
-                var dados = BuscarDadosUsuario(username);
+                var dados = BuscarDadosUsuario(email);
                 if (dados != null)
                 {
-
+                    textBoxNome.Text = dados.Value.Nome;
+                    textBoxEmail.Text = dados.Value.Email;
+                    textBoxMorada.Text = dados.Value.Morada;
+                    textBoxDataNascimento.Text = dados.Value.DataNascimento;
+                    textBoxTelefone.Text = dados.Value.Telefone;
                 }
                 else
                 {
@@ -78,7 +82,7 @@ namespace projetov1
 
 
         }
-        public static (string Nome, string Email, string Morada, string DataNascimento, string Telefone)? BuscarDadosUsuario(string username)
+        public static (string Nome, string Email, string Morada, string DataNascimento, string Telefone)? BuscarDadosUsuario(string email)
         {
             string dbServer = "tcp: mednat.ieeta.pt\\SQLSERVER,8101";
             string dbName = "p2g2";
@@ -87,18 +91,19 @@ namespace projetov1
             using var conn = new SqlConnection($"Data Source={dbServer};Initial Catalog={dbName};uid={userName};password={userPass};TrustServerCertificate=True");
             conn.Open();
 
-            var cmd = new SqlCommand("SELECT Nome, Email, Morada, DataNascimento, Telefone FROM Users WHERE Username = @username", conn);
-            cmd.Parameters.AddWithValue("@username", username);
+            var cmd = new SqlCommand(
+                "SELECT nome_completo, email, morada, data_nascimento, phone_number FROM igreja.Pessoa WHERE email = @email", conn);
+            cmd.Parameters.AddWithValue("@email", email);
 
             using var reader = cmd.ExecuteReader();
             if (reader.Read())
             {
                 return (
-                    reader["Nome"].ToString() ?? "",
-                    reader["Email"].ToString() ?? "",
-                    reader["Morada"].ToString() ?? "",
-                    reader["DataNascimento"].ToString() ?? "",
-                    reader["Telefone"].ToString() ?? ""
+                    reader["nome_completo"].ToString() ?? "",
+                    reader["email"].ToString() ?? "",
+                    reader["morada"].ToString() ?? "",
+                    reader["data_nascimento"]?.ToString() ?? "",
+                    reader["phone_number"].ToString() ?? ""
                 );
             }
             return null;
@@ -148,10 +153,7 @@ namespace projetov1
 
         private void Salvar_Click(object sender, EventArgs e)
         {
-            var username = Login.CurrentUsername;
-            if (string.IsNullOrEmpty(username)) return;
-
-            string nome = textBoxNome.Text;
+            string nomeCompleto = textBoxNome.Text;
             string email = textBoxEmail.Text;
             string morada = textBoxMorada.Text;
             string dataNascimento = textBoxDataNascimento.Text;
@@ -165,16 +167,17 @@ namespace projetov1
             conn.Open();
 
             var cmd = new SqlCommand(
-                "UPDATE users SET Nome=@nome, Email=@email, Morada=@morada, DataNascimento=@dataNascimento, Telefone=@telefone WHERE Username=@username", conn);
-            cmd.Parameters.AddWithValue("@nome", nome);
+                "INSERT INTO igreja.Pessoa (nome_completo, email, morada, data_nascimento, phone_number) " +
+                "VALUES (@nome_completo, @email, @morada, @data_nascimento, @phone_number)", conn);
+            cmd.Parameters.AddWithValue("@nome_completo", nomeCompleto);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@morada", morada);
-            cmd.Parameters.AddWithValue("@dataNascimento", dataNascimento);
-            cmd.Parameters.AddWithValue("@telefone", telefone);
-            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@data_nascimento", string.IsNullOrWhiteSpace(dataNascimento) ? (object)DBNull.Value : DateTime.Parse(dataNascimento));
+            cmd.Parameters.AddWithValue("@phone_number", telefone);
 
             int rows = cmd.ExecuteNonQuery();
 
+            // Bloqueia os campos e esconde o botão salvar
             textBoxNome.ReadOnly = true;
             textBoxEmail.ReadOnly = true;
             textBoxMorada.ReadOnly = true;
@@ -183,9 +186,9 @@ namespace projetov1
             buttonSalvar.Visible = false;
 
             if (rows > 0)
-                MessageBox.Show("Dados atualizados com sucesso!");
+                MessageBox.Show("Dados inseridos com sucesso!");
             else
-                MessageBox.Show("Erro ao atualizar dados.");
+                MessageBox.Show("Erro ao inserir dados.");
         }
 
         private void Eventos_Click(object sender, EventArgs e)
