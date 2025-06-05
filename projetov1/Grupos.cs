@@ -88,13 +88,48 @@ namespace projetov1
             }
 
         }
-        //apesar de clicar no botão salvar, o grupo não é atualizado na base de dados e aparece o popup
+
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
-            string grupoSelecionado = comboBox1.SelectedItem?.ToString() ?? "";
-            string escalaSelecionada = Box_Escala.SelectedItem?.ToString() ?? "";
-            string username = Login.CurrentUsername;
-            if (string.IsNullOrEmpty(grupoSelecionado) || string.IsNullOrEmpty(escalaSelecionada) || string.IsNullOrEmpty(username))
+            if (comboBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione um grupo.");
+                return;
+            }
+            if (Box_Escala.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione uma escala.");
+                return;
+            }
+
+            string grupoSelecionado = comboBox1.SelectedItem.ToString();
+            string escalaSelecionada = Box_Escala.SelectedItem.ToString();
+            string email = Login.CurrentUsername;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                MessageBox.Show("Usuário não identificado.");
+                return;
+            }
+           
+            if (comboBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione um grupo.");
+                return;
+            }
+            if (Box_Escala.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione uma escala.");
+                return;
+            }
+            if (string.IsNullOrEmpty(email))
+            {
+                MessageBox.Show("Usuário não identificado.");
+                return;
+            }
+
+            // Ensure grupoSelecionado and escalaSelecionada are not null or empty.  
+            if (string.IsNullOrEmpty(grupoSelecionado) || string.IsNullOrEmpty(escalaSelecionada))
             {
                 MessageBox.Show("Selecione um grupo e uma escala.");
                 return;
@@ -107,22 +142,60 @@ namespace projetov1
             using var conn = new SqlConnection($"Data Source={dbServer};Initial Catalog={dbName};uid={userName};password={userPass};TrustServerCertificate=True");
             conn.Open();
 
-            // Atualiza os campos Role e Escala na tabela users
-            var cmd = new SqlCommand("UPDATE users SET Role=@role, Escala=@escala WHERE username=@username", conn);
-            cmd.Parameters.AddWithValue("@role", grupoSelecionado);
-            cmd.Parameters.AddWithValue("@escala", escalaSelecionada);
-            cmd.Parameters.AddWithValue("@username", username);
+            // Buscar o id_pessoa pelo email  
+            int idPessoa = -1;
+            using (var cmdPessoa = new SqlCommand("SELECT id_pessoa FROM igreja.Pessoa WHERE username = @nome_completo", conn))
+            {
+                cmdPessoa.Parameters.AddWithValue("@Email", email);
+                var result = cmdPessoa.ExecuteScalar();
+                if (result == null)
+                {
+                    MessageBox.Show("Usuário não encontrado.");
+                    return;
+                }
+                idPessoa = Convert.ToInt32(result);
+            }
 
-            int rows = cmd.ExecuteNonQuery();
-            if (rows > 0)
-                MessageBox.Show("Grupo e escala atualizados com sucesso!");
-            else
-                MessageBox.Show("Erro ao atualizar grupo e escala.");
+            // Buscar o id_grupo pelo nome do grupo  
+            int idGrupo = -1;
+            using (var cmdGrupo = new SqlCommand("SELECT id_grupo FROM igreja.Grupo WHERE nome = @NomeGrupo", conn))
+            {
+                cmdGrupo.Parameters.AddWithValue("@NomeGrupo", grupoSelecionado);
+                var result = cmdGrupo.ExecuteScalar();
+                if (result == null)
+                {
+                    MessageBox.Show("Grupo não encontrado.");
+                    return;
+                }
+                idGrupo = Convert.ToInt32(result);
+            }
+
+            // Inserir na tabela MembroGrupo  
+            using (var cmd = new SqlCommand(
+                "INSERT INTO igreja.MembroGrupo (funcao, data_entrada, id_pessoa_membro, id_grupo_membro) " +
+                "VALUES (@funcao, @data_entrada, @id_pessoa_membro, @id_grupo_membro)", conn))
+            {
+                cmd.Parameters.AddWithValue("@funcao", escalaSelecionada);
+                cmd.Parameters.AddWithValue("@data_entrada", DateTime.Now.Date);
+                cmd.Parameters.AddWithValue("@id_pessoa_membro", idPessoa);
+                cmd.Parameters.AddWithValue("@id_grupo_membro", idGrupo);
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                    MessageBox.Show("Grupo e escala guardados com sucesso!");
+                else
+                    MessageBox.Show("Erro ao guardar grupo e escala.");
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Grupos_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

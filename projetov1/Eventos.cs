@@ -82,7 +82,7 @@ namespace projetov1
             using var conn = new SqlConnection($"Data Source={dbServer};Initial Catalog={dbName};uid={userName};password={userPass};TrustServerCertificate=True");
             conn.Open();
 
-            // Supondo que existe uma tabela DisponibilidadeEventos com Username, Evento, Disponivel
+            
             var cmd = new SqlCommand(
                 "INSERT INTO DisponibilidadeEventos (Username, Evento, Disponivel) VALUES (@username, @evento, @disponivel)", conn);
             cmd.Parameters.AddWithValue("@username", username);

@@ -157,8 +157,8 @@ namespace projetov1
             if (!VerifySGBDConnection())
                 return;
 
-            string username = login_username.Text;
-            string password = login_pass.Text;
+            string username = login_username.Text; // Aqui deve ser o nome completo
+            string password = login_pass.Text;     // Aqui deve ser a senha
 
             if (username.Length == 0 || password.Length == 0)
             {

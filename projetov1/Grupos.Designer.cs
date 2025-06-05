@@ -31,6 +31,7 @@
             close = new Label();
             label8 = new Label();
             panel1 = new Panel();
+            label4 = new Label();
             label2 = new Label();
             Button_to_Profile = new Button();
             Eventos = new Button();
@@ -43,7 +44,6 @@
             label1 = new Label();
             Box_Escala = new ComboBox();
             label3 = new Label();
-            label4 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -79,6 +79,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(685, 73);
             panel1.TabIndex = 38;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(656, 9);
+            label4.Name = "label4";
+            label4.Size = new Size(18, 18);
+            label4.TabIndex = 47;
+            label4.Text = "X";
+            label4.Click += label4_Click;
             // 
             // label2
             // 
@@ -227,17 +238,6 @@
             label3.TabIndex = 46;
             label3.Text = "Escala";
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(656, 9);
-            label4.Name = "label4";
-            label4.Size = new Size(18, 18);
-            label4.TabIndex = 47;
-            label4.Text = "X";
-            label4.Click += label4_Click;
-            // 
             // Grupos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -256,6 +256,7 @@
             Name = "Grupos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Grupos";
+            Load += Grupos_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);

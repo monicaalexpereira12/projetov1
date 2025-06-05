@@ -20,6 +20,9 @@ namespace projetov1
     public partial class Register : Form
     {
         private SqlConnection connect;
+
+        public static string currentUser { get; private set; }
+
         public Register()
         {
             InitializeComponent();
@@ -125,13 +128,11 @@ namespace projetov1
                 }
 
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-
-                // Usando transação para garantir integridade
                 using (SqlTransaction transaction = connect.BeginTransaction())
                 {
                     try
                     {
-                        // 1. Inserir na tabela Pessoa e obter o ID gerado
+                        //Inserir na tabela Pessoa e obter o ID gerado
                         int newId;
                         using (SqlCommand cmd = new SqlCommand(
                             "INSERT INTO igreja.Pessoa (nome_completo, email) OUTPUT INSERTED.id_pessoa VALUES (@nome, @email);",
@@ -142,7 +143,7 @@ namespace projetov1
                             newId = (int)cmd.ExecuteScalar();
                         }
 
-                        // 2. Inserir na tabela Users com o mesmo ID
+                        //Inserir na tabela Users com o mesmo ID
                         using (SqlCommand cmd = new SqlCommand(
                             "INSERT INTO igreja.Users (id_number, password_hash, funcao) VALUES (@id, @password, @role);",
                             connect, transaction))
@@ -159,10 +160,12 @@ namespace projetov1
                         }
 
                         transaction.Commit();
+                        
                         MessageBox.Show("Conta criada com sucesso!");
+                        Register.currentUser = username; // Atualiza o usuário atual
                         Menu menu = new Menu();
                         menu.Show();
-                        this.Close();
+                        this.Hide();
                     }
                     catch (Exception ex)
                     {
